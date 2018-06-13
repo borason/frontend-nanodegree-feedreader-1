@@ -3,7 +3,7 @@
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
  */
-var menuClass;
+// var menuClass;
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
@@ -53,7 +53,7 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe('The Menu', function() {
-        const menuClass = document.body.classList.contains('menu-hidden');
+        // let menuClass = document.body.classList.contains('menu-hidden');
         const hamburger = document.querySelector('.icon-list');
 
         /* TODO: Write a test that ensures the menu element is
@@ -63,15 +63,18 @@ $(function() {
          */
         it('hidden by default', function() {
             // const body = document.querySelector('body');
-            expect(menuClass).toBe(true);
+            expect(document.body.classList.contains('menu-hidden')).toBe(true);
         });
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-        it('toggles when clicked', function() {
-            var simulateClick = function (elem) {
+        it('toggles menu when clicked', function() {
+        /* simulateClick function was obtained from
+        https://gomakethings.com/how-to-simulate-a-click-event-with-javascript/
+        which is licenced under MIT license https://gomakethings.com/mit */
+           let simulateClick = function (elem) {
                 // Create our event (with options)
                 var evt = new MouseEvent('click', {
                     bubbles: true,
@@ -81,12 +84,17 @@ $(function() {
                 // If cancelled, don't dispatch our event
                 var canceled = !elem.dispatchEvent(evt);
             };
-            simulateClick(hamburger);//
-            expect(menuClass).toBe(false);
-            // simulateClick(hamburger);
-            // expect(menuClass).toBe(true);
+            // first click opens menu
+            simulateClick(hamburger);
+            // click removes 'menu-hidden' class from body and checks to make sure that it doesn't contain that class
+            expect(document.body.classList.contains('menu-hidden')).toBe(false);
+            // second click closes menu
+            simulateClick(hamburger);
+            // click adds 'menu-hidden' class to body and checks to make sure that class is there
+            expect(document.body.classList.contains('menu-hidden')).toBe(true);
         });
-    });
+});
+
     /* TODO: Write a new test suite named "Initial Entries" */
 
         /* TODO: Write a test that ensures when the loadFeed
