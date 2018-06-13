@@ -82,7 +82,7 @@ $(function() {
                 var canceled = !elem.dispatchEvent(evt);
             };
             simulateClick(hamburger);//
-            expect(menuClass).toBeUndefined();
+            expect(menuClass).toBe(false);
             // simulateClick(hamburger);
             // expect(menuClass).toBe(true);
         });
