@@ -3,7 +3,7 @@
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
  */
-
+var menuClass;
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
@@ -64,21 +64,28 @@ $(function() {
         it('hidden by default', function() {
             // const body = document.querySelector('body');
             expect(menuClass).toBe(true);
-        })
+        });
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
         it('toggles when clicked', function() {
-          const event = new MouseEvent('click', {
-            view: window,
-          });
-            hamburger.dispatchEvent(event);//
-            expect(menuClass).toBe(true);
-            hamburger.dispatchEvent(event);
-            expect(menuClass).toBe(false);
-            });
+            var simulateClick = function (elem) {
+                // Create our event (with options)
+                var evt = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                // If cancelled, don't dispatch our event
+                var canceled = !elem.dispatchEvent(evt);
+            };
+            simulateClick(hamburger);//
+            expect(menuClass).toBeUndefined();
+            // simulateClick(hamburger);
+            // expect(menuClass).toBe(true);
+        });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
 

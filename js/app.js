@@ -5,7 +5,7 @@
  * use of. It also uses the Handlebars templating library and
  * jQuery.
  */
-
+var menuClass;
 // The names and URLs to all of the feeds we'd like available.
 var allFeeds = [
     {
