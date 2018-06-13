@@ -74,7 +74,7 @@ $(function() {
           const event = new MouseEvent('click', {
             view: window,
           });
-            hamburger.dispatchEvent(event);
+            hamburger.dispatchEvent(event);//
             expect(menuClass).toBe(true);
             hamburger.dispatchEvent(event);
             expect(menuClass).toBe(false);
